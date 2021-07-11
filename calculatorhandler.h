@@ -1,16 +1,9 @@
 #ifndef CALCULATORHANDLER_H
 #define CALCULATORHANDLER_H
 
+#include "calculatorenum.h"
 #include "unordered_map"
-namespace Calculator {
-    enum class OperationType {
-        ADD,
-        SUB,
-        MUL,
-        DIV
-    };
 
-}
 class CalculatorHandler
 {
 public:

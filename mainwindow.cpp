@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "calculatorhandler.h"
 #include <QIntValidator>
 
 namespace {
@@ -21,37 +22,35 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->lineEditA->setValidator( new QIntValidator(0, 100, this) );
     ui->lineEditB->setValidator( new QIntValidator(0, 100, this) );
+
     connect(ui->btnAdd, &QAbstractButton::clicked, this, [this](){
-        int result = handler(Calculator::OperationType::ADD,
-                             getNumber(ui->lineEditA),
-                             getNumber(ui->lineEditB));
-        setNumber(ui->lineEditResult, result);
+        using namespace Calculator;
+        setNumber(ui->lineEditResult, computeResultByHandler(OperationType::ADD));
     });
 
     connect(ui->btnSub, &QAbstractButton::clicked, this, [this](){
-        int result = handler(Calculator::OperationType::SUB,
-                             getNumber(ui->lineEditA),
-                             getNumber(ui->lineEditB));
-        setNumber(ui->lineEditResult, result);
+        using namespace Calculator;
+        setNumber(ui->lineEditResult, computeResultByHandler(OperationType::SUB));
     });
 
     connect(ui->btnMul, &QAbstractButton::clicked, this, [this](){
-        int result = handler(Calculator::OperationType::MUL,
-                             getNumber(ui->lineEditA),
-                             getNumber(ui->lineEditB));
-        setNumber(ui->lineEditResult, result);
+        using namespace Calculator;
+        setNumber(ui->lineEditResult, computeResultByHandler(OperationType::MUL));
     });
 
     connect(ui->btnDiv, &QAbstractButton::clicked, this, [this](){
-        int result = handler(Calculator::OperationType::DIV,
-                             getNumber(ui->lineEditA),
-                             getNumber(ui->lineEditB));
-        setNumber(ui->lineEditResult, result);
+        using namespace Calculator;
+        setNumber(ui->lineEditResult, computeResultByHandler(OperationType::DIV));
     });
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+int MainWindow::computeResultByHandler(Calculator::OperationType type)
+{
+    return (*handler)(type, getNumber(ui->lineEditA), getNumber(ui->lineEditB));
 }
 

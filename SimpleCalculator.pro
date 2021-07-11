@@ -14,6 +14,7 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    calculatorenum.h \
     calculatorhandler.h \
     mainwindow.h
 

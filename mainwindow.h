@@ -3,7 +3,9 @@
 
 #include <QMainWindow>
 
-#include "calculatorhandler.h"
+#include "calculatorenum.h"
+
+class CalculatorHandler;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,7 +20,10 @@ public:
     ~MainWindow();
 
 private:
+    int computeResultByHandler(Calculator::OperationType type);
+
+private:
     Ui::MainWindow *ui;
-    CalculatorHandler handler;
+    CalculatorHandler* handler;
 };
 #endif // MAINWINDOW_H
